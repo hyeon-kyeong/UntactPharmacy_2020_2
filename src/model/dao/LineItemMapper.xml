@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.LineItemMapper">
+   <cache />
+   <select id = "getLineItemsByReservationId" resultType = "LineItem">
+   SELECT 
+   	RESERV_ID, 
+   	MED_ID,
+   	LINENO,
+   	PRICE,
+   	QUANTITY,
+   	TOTAL_PRICE
+   FROM LINEITEM_RESERV
+   WHERE RESERV_ID = #{reserv_id}
+   </select>
+   
+   <insert id = "insertLineItem">
+   INSERT INTO LINEITEM_RESERV (RESERV_ID, MED_ID, LINENO, PRICE, QUANTITY, TOTAL_PRICE) 
+   VALUES (#{reserv_id}, #{med_id}, #{lineno}, #{price}, #{quantity}, #{total_price})
+   </insert>
+   
+    <delete id="deleteLineItem" parameterType="LineItem">
+      DELETE FROM LINEITEM_RESERV 
+      WHERE reserv_id = #{reserv_id}
+   </delete>
+   
+</mapper>

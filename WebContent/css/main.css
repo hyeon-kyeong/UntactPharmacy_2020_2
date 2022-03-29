@@ -1,0 +1,129 @@
+* {
+    /*border: 1px solid red;*/
+    padding: 0px;
+    margin: 0px;}
+
+@import url('https://fonts.googleapis.com/css2?family=Nanum+Gothic:wght@700&display=swap');
+body {
+    background-color: #ffffff;}
+
+header {
+    height: 0px;
+    margin: 0px;
+}
+body h1 { font-size: 40px;}
+
+nav {
+    margin: 140px;
+}
+
+    nav ul {
+        list-style: none;
+        text-align: center;
+        border-bottom: 2px solid #0057c9;
+        padding: 20px;
+        margin-top: 320px;
+    }
+
+        nav ul li {
+        	font-family: 'Nanum Gothic', sans-serif;
+            display: inline;
+	    	font-color: #0057c9;
+            text-transform: uppercase;
+            padding: 0 24px;
+            letter-spacing: 4px;
+        }
+
+            nav ul li a {
+                text-decoration: none;
+                color: #0057c9;
+            }
+
+                nav ul li a:hover {
+                    text-decoration: underline;
+                }
+
+
+aside#left {
+    width: 220px;
+    margin-top: 0px;
+    margin-left: 35px;
+    float: left;
+}
+
+#left h3 {
+    font-family: 'Fondamento', cursive;
+    font-size: 30px;
+    color: #0057c9;
+}
+
+#left ul {
+    font-family: 'East Sea Dokdo', cursive;
+    font-size: 30px;
+    color: #0057c9;
+    list-style: none;
+    text-indent: 15px;
+}
+
+    #left ul li {
+        line-height: 48px;
+        border-bottom: 2px solid #0057c9;
+    }
+
+        #left ul li a {
+            text-decoration: none;
+            color: #0057c9;
+            display: block;
+        }
+
+            #left ul li a:hover {
+                background: #623d27;
+            }
+
+        #left ul li#active {
+            background: #d40203;
+        }
+
+#main {
+    font-size: 14px;
+    color: #0057c9;
+    overflow: hidden;
+    float: left;
+    width: 1020px;
+    height: 100%;
+    margin-top: 20px;
+    margin-left: 24px;
+}
+
+
+/*#login {
+font-family: Garamond, Times New Roman, serif;
+color: #FFFFFF;
+font-size:20px;
+margin-top: 40px;
+}
+
+#login pre{font-family: Garamond, Times New Roman, serif;
+	   font-size: 17px;}
+#register{ font-size: 17px;}
+#forgot{ font-size:17px;}
+
+aside#right {
+    padding: 0px;
+    margin-left: 100px;
+    width: 250px;
+    float: left;
+} */
+
+footer {
+    width: 100%;
+    height: 50px;
+	font-family: 'Nanum Gothic', sans-serif;
+	color: #ccd7e0;
+    clear: both;
+    margin-top: 20px;
+    margin-left: 24px;
+    background-image: url(images/footer_bg.gif);
+    background-position: top right;
+    background-repeat: repeat-x;
+}

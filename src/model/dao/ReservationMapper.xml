@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.ReservationMapper">
+   <cache />
+   
+   <insert id="insertReservation" parameterType="Reservation">
+      <selectKey keyProperty="reserv_id" resultType="int" order="BEFORE">
+         SELECT reserv_id_seq.nextval AS reserv_id FROM DUAL 
+      </selectKey>
+      INSERT INTO Reservation (reserv_id, user_id, med_id, pharm_name, reserv_date, address) 
+      VALUES (#{reserv_id}, #{user_id}, #{med_id}, #{pharm_name}, #{reserv_date}, #{address})
+   </insert>
+
+   <update id="updateReservation" parameterType="Reservation">
+      UPDATE Reservation 
+      SET address = #{address}, pharm_name = #{pharm_name} 
+      WHERE reserv_id = #{reserv_id}      
+   </update>
+
+   <delete id="deleteReservation" parameterType="int">
+      DELETE FROM Reservation 
+      WHERE reserv_id = #{reserv_id}
+   </delete>
+   
+   <resultMap id="reservationResultMap" type="Reservation">
+      <id column="reserv_id" jdbcType="INTEGER" property="reserv_id" />
+      <result column="user_id" jdbcType="VARCHAR" property="user_id" />
+      <result column="med_id" jdbcType="VARCHAR" property="med_id" />
+      <result column="pharm_name" jdbcType="VARCHAR" property="pharm_name" />
+      <result column="reserv_date" jdbcType="VARCHAR" property="reserv_date" />
+      <result column="address" jdbcType="VARCHAR" property="address" />
+   </resultMap>
+
+   <select id="selectReservation" parameterType="int"          
+      resultMap="reservationResultMap"> 
+      SELECT reserv_id, user_id, med_id, pharm_name, reserv_date, address
+      FROM Reservation 
+      WHERE reserv_id = #{reserv_id}
+   </select>
+   
+   <select id="findReservationListByUser_id" resultType="Reservation">         
+      SELECT reserv_id AS reserv_id,
+      		 user_id AS user_id,
+      		 med_id AS med_id,
+      		 pharm_name AS pharm_name,
+      		 reserv_date AS reserv_date
+      FROM Reservation 
+      WHERE user_id = #{user_id}
+      ORDER BY reserv_id 
+   </select>
+   
+   <select id="selectAllResrvations" resultType="Reservation">
+      SELECT reserv_id, user_id, med_id, pharm_name, reserv_date
+        FROM Reservation 
+        ORDER BY reserv_id
+    </select>
+</mapper>

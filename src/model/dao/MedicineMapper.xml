@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.MedicineMapper">
+	<cache/>
+	
+	<insert id="createMedicine" parameterType="Medicine">
+		INSERT INTO MEDICINE (med_id, med_name, symptom, co_name, med_category, price, quantity, filename) 
+		VALUES (#{med_id}, #{med_name}, #{symptom}, #{co_name},
+		 #{med_category}, #{price}, #{quantity}, #{filename})
+	</insert>
+
+	<delete id="deleteMedicine" parameterType="Medicine">
+		DELETE FROM MEDICINE 
+		WHERE med_id = #{med_id}
+	</delete>   
+	
+		<resultMap id="medicineResultMap" type="Medicine">
+		<id column="med_id" jdbcType="VARCHAR" property="med_id" />
+		<result column="med_name" jdbcType="VARCHAR" property="med_name" />
+		<result column="symptom" jdbcType="VARCHAR" property="symptom" />
+		<result column="co_name" jdbcType="VARCHAR" property="co_name" />
+		<result column="med_category" jdbcType="VARCHAR" property="med_category" />
+		<result column="price" jdbcType="VARCHAR" property="price" />
+		<result column="reserv_id" jdbcType="VARCHAR" property="reserv_id" />
+		<result column="quantity" jdbcType="INTEGER" property="quantity" />
+		<result column="filename" jdbcType="VARCHAR" property="filename" />
+	</resultMap>
+	
+	<select id="findMedicine" resultType="Medicine">
+		SELECT med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+		FROM MEDICINE
+		WHERE med_id = #{med_id}
+	</select>
+	
+	
+	<select id="searchMedicineByPrimaryKey" resultType="Medicine">
+		SELECT med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+		FROM MEDICINE
+		WHERE med_id = #{med_id}
+	</select>
+	
+	<select id="searchMedicineByMed_name" resultType="Medicine">
+		SELECT med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+		FROM MEDICINE
+		WHERE med_name LIKE '%' || #{med_name}|| '%'
+	</select>
+	
+	<select id="searchMedicineListBySymptom" resultType="Medicine">
+		SELECT med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+		FROM MEDICINE
+		WHERE symptom LIKE '%' || #{symptom}|| '%'
+	</select>
+	
+	<select id="searchMedicineListByMed_category" resultType="Medicine">
+		SELECT med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+		FROM MEDICINE
+		WHERE category LIKE '%' || #{category}|| '%'
+	</select>
+	
+	<update id="updateMedicine" parameterType="Medicine">
+		UPDATE MEDICINE 
+		SET med_id = #{med_id}, med_name = #{med_name}, symptom = #{symptom},
+			co_name = #{co_name}, med_category = #{med_category}, price = #{price}, quantity = #{quantity}, filename = #{filename, jdbcType=VARCHAR}
+		WHERE med_id = #{med_id}		
+	</update>
+	
+	<update id="updateMedicineQuantity" parameterType="Medicine">
+		UPDATE MEDICINE 
+		SET quantity = #{quantity} 
+		WHERE med_id = #{med_id}		
+	</update>
+	
+	<select id="ListAllMedicine" resultType="Medicine">
+		SELECT  med_id AS med_id, 
+			    med_name AS med_name,
+			    symptom AS symptom,
+			    co_name AS co_name,
+			    med_category AS med_category,
+			    price AS price,
+			    reserv_id AS reserv_id,
+			    quantity AS quantity,
+			    filename AS filename
+        FROM MEDICINE
+    </select>
+</mapper>

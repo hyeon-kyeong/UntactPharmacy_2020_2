@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration
+  PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<settings>
+		<setting name="cacheEnabled" value="false" />
+	</settings>
+	<typeAliases>
+		<typeAlias type="model.Community" alias="Community" />
+		<typeAlias type="model.User" alias="User" />
+		<typeAlias type="model.Post" alias="Post" />
+		<typeAlias type="model.PharmacyDTO" alias="PharmacyDTO" />
+		<typeAlias type="model.Reservation" alias="Reservation" />
+		<typeAlias type="model.Medicine" alias="Medicine" />
+		<typeAlias type="model.LineItem" alias="LineItem" />
+
+	</typeAliases>
+	<environments default="development">
+		<environment id="development">
+			<transactionManager type="JDBC" />
+			<dataSource type="POOLED">
+				<property name="driver"
+					value="oracle.jdbc.driver.OracleDriver" />
+				<property name="url"
+					value="jdbc:oracle:thin:@202.20.119.117:1521:orcl" />
+				<property name="username" value="dbprog0211" />
+				<property name="password" value="Som3856" />
+			</dataSource>
+		</environment>
+	</environments>
+	<mappers>
+		<mapper resource="model/dao/PostMapper.xml" />
+		<mapper resource="model/dao/PharmacyMapper.xml" />
+		<mapper resource="model/dao/ReservationMapper.xml" />
+		<mapper resource="model/dao/MedicineMapper.xml" />
+		<mapper resource="model/dao/LineItemMapper.xml" />
+
+	</mappers>
+</configuration>

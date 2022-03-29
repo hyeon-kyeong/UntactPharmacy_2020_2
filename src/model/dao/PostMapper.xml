@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="model.dao.PostMapper">
+	<cache />
+	
+	<insert id="insertPost" parameterType="Post">
+		<selectKey keyProperty="post_id" resultType="int" order="BEFORE">
+			SELECT post_id_seq.nextval AS post_id FROM DUAL 
+		</selectKey>
+		INSERT INTO Post (post_id, user_id, med_id, post_date, title, content, ingestion_start, ingestion_end) 
+		VALUES (#{post_id}, #{user_id}, #{med_id}, SYSDATE, #{title}, #{content}, #{ingestion_start}, #{ingestion_end})
+	</insert>
+
+	<update id="updatePost" parameterType="Post">
+		UPDATE Post 
+		SET med_id = #{med_id}, title = #{title}, content = #{content} 
+		WHERE post_id = #{post_id}		
+	</update>
+
+	<delete id="deletePost" parameterType="int">
+		DELETE FROM Post 
+		WHERE post_id = #{post_id}
+	</delete>   
+		
+	<resultMap id="postResultMap" type="Post">
+		<id column="post_id" jdbcType="INTEGER" property="post_id" />
+		<result column="user_id" jdbcType="VARCHAR" property="user_id" />
+		<result column="med_id" jdbcType="VARCHAR" property="med_id" />
+		<result column="post_date" jdbcType="VARCHAR" property="post_date" />
+		<result column="title" jdbcType="VARCHAR" property="title" />
+		<result column="content" jdbcType="VARCHAR" property="content" />
+		<result column="ingestion_start" jdbcType="VARCHAR" property="ingestion_start" />
+		<result column="ingestion_end" jdbcType="VARCHAR" property="ingestion_end" />
+	</resultMap>
+    
+	<select id="selectPost" parameterType="int" 			
+		resultMap="postResultMap"> 
+		SELECT post_id, user_id, med_id, post_date, title, content, ingestion_start, ingestion_end
+		FROM Post
+		WHERE post_id = #{post_id} 
+	</select>
+	
+	<select id="findPostByUser_id" resultType="Post">
+		SELECT post_id, user_id, med_id, post_date, title, content, ingestion_start, ingestion_end
+		FROM Post
+		WHERE user_id = #{user_id} 
+	</select>
+	
+	<select id="selectAllPosts" resultType="Post">
+		SELECT post_id, user_id, med_id, post_date, title, content , ingestion_start, ingestion_end
+		FROM Post 
+        ORDER BY post_id
+    </select>
+</mapper>
